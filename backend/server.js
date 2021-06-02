@@ -5,7 +5,7 @@ import crypto from 'crypto'
 import bcrypt from 'bcrypt'
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/auth-event"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
 mongoose.Promise = Promise
 
 const userSchema = mongoose.Schema({
@@ -26,9 +26,27 @@ const userSchema = mongoose.Schema({
   accessToken: {
     type: String,
     default: () => crypto.randomBytes(128).toString('hex')
-  }
+  },
+  feelings: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Feeling'
+  }]
 })
 const User = mongoose.model('User', userSchema)
+
+const feelingSchema = mongoose.Schema({
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  description: String,
+  value: Number
+})
+const Feeling = mongoose.model('Feeling', feelingSchema)
 
 const authenticateUser = async (req, res, next) => {
   const user = await User.findOne({ accessToken: req.header('Authorization') })
@@ -84,6 +102,33 @@ app.post('/login', async (req, res) => {
 
   } catch (error) {
     res.status(400).json({ message: 'Bad request', error })
+  }
+})
+
+app.post('/users/:id/feelings', async (req, res) => {
+  const { value, description } = req.body
+  const { id } = req.params
+  console.log(id)
+  try {
+    const newFeeling = await new Feeling({
+      user: id,
+      value,
+      description
+    }).save()
+
+    const foundUser = await User.findOneAndUpdate({ _id: id }, { $push: { feelings: newFeeling } }, { new: true })
+    res.status(201).json({ value: newFeeling.value, description: newFeeling.description })
+  } catch (error) {
+    res.status(404).json({ message: 'Could not register feeling', error })
+  }
+})
+app.get('/users/:id/feelings', async (req, res) => {
+  const { id } = req.params
+  try {
+    const usersFeelings = await Feeling.find({ user: id })
+    res.json(usersFeelings)
+  } catch (error) {
+    res.status(404).json({ message: 'Could not find user', error })
   }
 })
 
