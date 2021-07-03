@@ -15,9 +15,6 @@ const Container = () => {
         <Route exact path="/login">
           <Login/>
         </Route>
-        <Route exact path="/secret">
-          <Secret/>
-        </Route>
       </Switch>
     </BrowserRouter>
   )
