@@ -1,13 +1,16 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import Home from '../pages/Home'
+import Header from 'components/Header'
+
+import Home from 'pages/Home'
 import Login from '../pages/Login'
-import Secret from '../pages/Secret'
+
 
 const Container = () => {
   return (
     <BrowserRouter>
+    <Header />
       <Switch>
         <Route exact path="/">
           <Home />
