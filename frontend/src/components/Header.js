@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
+import { Animated } from 'react-animated-css';
 
 import logo from 'assets/logo.png'
+import { Block } from '@material-ui/icons';
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const styleHamburger = {
+    fontSize: "60px",
+    display: menuOpen ? "none" : "block",
+  }
+
+  const styleClose = {
+    fontSize: "60px",
+    display: !menuOpen ? "none" : "block",
+  }
 
   const onHamburgerClick = () => {
     setMenuOpen(!menuOpen)
-  }
+  };
 
   return (
     <HeaderContainer>
@@ -17,24 +30,31 @@ const Header = () => {
       </LogoContainer>
       <Nav>
         <HamburgerButton onClick={onHamburgerClick}>
-          <MenuIcon style={style} />
+          <Animated animationIn="zoomIn" animationOut="zoomOut" isVisible={menuOpen} animateOnMount={false}>
+            <CloseIcon style={styleClose} />
+          </Animated>
+          <Animated animationIn="zoomIn" animationOut="zoomOut" isVisible={!menuOpen} animateOnMount={false}>
+            <MenuIcon style={styleHamburger} open={menuOpen} />
+          </Animated>
         </HamburgerButton>
-        <DropDownMenu open={menuOpen}>
-          <DropMenuItem>
-            About
-          </DropMenuItem>
-          <DropMenuItem>
-            Contact
-          </DropMenuItem>
-        </DropDownMenu>
+        <Animated animationIn="fadeIn" animationOut="fadeOut" isVisible={menuOpen} animateOnMount={false}>
+          <DropDownMenu open={menuOpen}>
+            <DropMenuItem>
+              About
+            </DropMenuItem>
+            <DropMenuItem>
+              Contact
+            </DropMenuItem>
+          </DropDownMenu>
+        </Animated>
         <NavList>
-        <NavListItem>About</NavListItem>
-        <NavListItem>Contact</NavListItem>
+          <NavListItem>About</NavListItem>
+          <NavListItem>Contact</NavListItem>
         </NavList>
       </Nav>
-    </HeaderContainer>
+    </HeaderContainer >
   );
-}
+};
 
 export default Header;
 
@@ -94,11 +114,9 @@ const HamburgerButton = styled.button`
   height: 70px;
   border: none;
   background-color: #fff;
+  position: relative;
 
   @media(min-width: 650px) {
     display: none
   }
 `
-const style = {
-  fontSize: "40px",
-}
