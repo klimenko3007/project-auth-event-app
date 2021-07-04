@@ -5,7 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { Animated } from 'react-animated-css';
 
 import logo from 'assets/logo.png'
-import { Block } from '@material-ui/icons';
+
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -17,6 +17,16 @@ const Header = () => {
   const styleClose = {
     fontSize: "60px",
     display: !menuOpen ? "none" : "block",
+  }
+
+  const style = {
+    position: "absolute",
+    width: "70%",
+    top: "100px",
+    right: 0,
+    padding: "10px",
+    backgroundColor: "#f5f3f2",
+    margin: 0,
   }
 
   const onHamburgerClick = () => {
@@ -37,15 +47,15 @@ const Header = () => {
             <MenuIcon style={styleHamburger} open={menuOpen} />
           </Animated>
         </HamburgerButton>
-        <Animated animationIn="fadeIn" animationOut="fadeOut" isVisible={menuOpen} animateOnMount={false}>
-          <DropDownMenu open={menuOpen}>
-            <DropMenuItem>
-              About
-            </DropMenuItem>
-            <DropMenuItem>
-              Contact
-            </DropMenuItem>
-          </DropDownMenu>
+        <Animated
+          animationIn="fadeInUp"
+          animationOut="fadeOut"
+          isVisible={menuOpen}
+          animateOnMount={false}
+          style={style}
+        >
+          <DropMenuItem>About</DropMenuItem>
+          <DropMenuItem> Contact </DropMenuItem>
         </Animated>
         <NavList>
           <NavListItem>About</NavListItem>
@@ -71,17 +81,17 @@ const HeaderContainer = styled.header`
 const Nav = styled.nav`
   margin: 0;
 `
-const DropDownMenu = styled.ul`
-  position: absolute;
-  width: 70%;
-  top: 100px;
-  right: 0;
-  padding: 10px;
-  background-color: #f5f3f2;  
-  display: ${props => props.open ? "block" : "none"};
-  margin: 0;
-`
-const DropMenuItem = styled.li`
+// const DropDownMenu = styled.ul`
+//   position: absolute;
+//   width: 70%;
+//   top: 100px;
+//   right: 0;
+//   padding: 10px;
+//   background-color: #f5f3f2;  
+//   display: ${props => props.open ? "block" : "none"};
+//   margin: 0;
+// `
+const DropMenuItem = styled.p`
   margin: 0;
   padding: 5px;
   border-bottom: 1px solid #e50038;
