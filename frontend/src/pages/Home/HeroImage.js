@@ -15,7 +15,7 @@ const HeroImage = () => {
           <HeroSubtitle>Artipelag, Värmdö</HeroSubtitle>
           <ButtonsContainer>
             <HomeButton>Register</HomeButton>
-            <HomeButton>Programme</HomeButton>
+            <HomeButton>Sign in</HomeButton>
           </ButtonsContainer>
         </TextButtonsContainerBackground>
       </TextButtonsContainer>
@@ -24,7 +24,6 @@ const HeroImage = () => {
         <source srcSet={desktop} media="(min-width: 950px)" />
         <Image src={mobile} />
       </Picture>
-
     </HeroImageContainer>
 
   );
@@ -71,6 +70,13 @@ const HeroTitle = styled.h1`
   text-align: center;
   font-size: 30px;
   color: #FCFEFF;
+
+  @media (max-width: 370px) {
+    font-size: 25px;
+  }
+  @media (min-width: 768px) {
+    font-size: 50px;
+  }
 `
 
 const HeroSubtitle = styled.h2`

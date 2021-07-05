@@ -18,6 +18,9 @@ export const userSchema = mongoose.Schema({
     type: String,
     trim: true 
   },
+  country: {
+    type: String,
+  },
   participationType: {
     type: String,
   }, 

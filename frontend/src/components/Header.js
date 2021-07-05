@@ -21,11 +21,12 @@ const Header = () => {
 
   const style = {
     position: "absolute",
-    width: "70%",
+    width: "100%",
+    textAlign: "center",
     top: "100px",
     right: 0,
     padding: "10px",
-    backgroundColor: "#f5f3f2",
+    backgroundColor: "#798298",
     margin: 0,
     zIndex: 5,
     display: !menuOpen ? "none" : "block",
@@ -57,11 +58,16 @@ const Header = () => {
           style={style}
         >
           <DropMenuItem>About</DropMenuItem>
+          <DropMenuItem> Programme </DropMenuItem>
           <DropMenuItem> Contact </DropMenuItem>
+          <DropMenuItem> Sponsor </DropMenuItem>
         </Animated>
         <NavList>
           <NavListItem>About</NavListItem>
+          <NavListItem>Programme</NavListItem>
           <NavListItem>Contact</NavListItem>
+          <NavListItem>Sponsor</NavListItem>
+
         </NavList>
       </Nav>
     </HeaderContainer >
@@ -96,8 +102,15 @@ const Nav = styled.nav`
 const DropMenuItem = styled.p`
   margin: 0;
   padding: 5px;
-  border-bottom: 1px solid #e50038;
   list-style: none;
+  color: #fff;
+  width: 100%;
+  font-weight: bold;
+
+    &:nth-child(2n) {
+      background-color: #757E95;
+      padding: 7px;
+    }
 `
 
 const NavList = styled.ul`
