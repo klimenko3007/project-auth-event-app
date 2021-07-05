@@ -27,6 +27,8 @@ const Header = () => {
     padding: "10px",
     backgroundColor: "#f5f3f2",
     margin: 0,
+    zIndex: 5,
+    display: !menuOpen ? "none" : "block",
   }
 
   const onHamburgerClick = () => {
@@ -71,7 +73,7 @@ export default Header;
 const HeaderContainer = styled.header`
   margin: 0;
   padding: 10px;
-  background-color: #fff;
+  background-color: #455F7A;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -123,8 +125,9 @@ const HamburgerButton = styled.button`
   width: 70px;
   height: 70px;
   border: none;
-  background-color: #fff;
   position: relative;
+  background-color: #455F7A;
+  color: #fff;
 
   @media(min-width: 650px) {
     display: none
