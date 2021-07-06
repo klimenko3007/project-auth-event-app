@@ -14,7 +14,7 @@ const HeroImage = () => {
           <HeroSubtitle>15 September 2021</HeroSubtitle>
           <HeroSubtitle>Artipelag, Värmdö</HeroSubtitle>
           <ButtonsContainer>
-            <HomeButton>Register</HomeButton>
+            <HomeButton href="#form-container">Register</HomeButton>
             <HomeButton>Sign in</HomeButton>
           </ButtonsContainer>
         </TextButtonsContainerBackground>
@@ -43,16 +43,17 @@ const Picture = styled.picture`
 
 const Image = styled.img`
   margin: 0;
-  width: 100vw;
+  width: 100%;
   height: 90vh;
   object-fit: cover;
   `
 const TextButtonsContainer = styled.div`
   position: absolute;
-  top: 0;
+  /* top: 0;
   bottom: 0;
   right: 0;
-  left: 0;
+  left: 0; */
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;

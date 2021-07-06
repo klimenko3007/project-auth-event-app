@@ -89,16 +89,6 @@ const HeaderContainer = styled.header`
 const Nav = styled.nav`
   margin: 0;
 `
-// const DropDownMenu = styled.ul`
-//   position: absolute;
-//   width: 70%;
-//   top: 100px;
-//   right: 0;
-//   padding: 10px;
-//   background-color: #f5f3f2;  
-//   display: ${props => props.open ? "block" : "none"};
-//   margin: 0;
-// `
 const DropMenuItem = styled.p`
   margin: 0;
   padding: 5px;
@@ -109,7 +99,6 @@ const DropMenuItem = styled.p`
 
     &:nth-child(2n) {
       background-color: #757E95;
-      padding: 7px;
     }
 `
 
