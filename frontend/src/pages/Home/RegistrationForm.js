@@ -11,7 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 
-import { countries } from './countries'
+import { countries } from './countries';
 import { block } from 'strip-comments';
 
 const RegistrationForm = () => {
@@ -25,12 +25,11 @@ const RegistrationForm = () => {
   const [password, setPassword] = useState('');
   const [participation, setParticipation] = useState('');
   const [agreeUpdates, setAgreeUpdates] = useState(false);
-  const [agreeTerms, setAgreeTerms] = useState(false)
-
+  const [agreeTerms, setAgreeTerms] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
-      <FormContainer id="form-container">
+      <FormContainer >
         <FormTitle>Register</FormTitle>
         <FormText>
           Register for the conference to get updates on the programme and speakers. Please fill in all the fields.

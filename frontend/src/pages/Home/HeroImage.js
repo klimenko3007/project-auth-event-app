@@ -5,7 +5,7 @@ import mobile from 'assets/mobile_hero.jpg'
 import tablet from 'assets/tablet_hero.jpg'
 import desktop from 'assets/desktop_hero.jpg'
 
-const HeroImage = () => {
+const HeroImage = ({ setTab }) => {
   return (
     <HeroImageContainer>
       <TextButtonsContainer>
@@ -14,8 +14,8 @@ const HeroImage = () => {
           <HeroSubtitle>15 September 2021</HeroSubtitle>
           <HeroSubtitle>Artipelag, Värmdö</HeroSubtitle>
           <ButtonsContainer>
-            <HomeButton href="#form-container">Register</HomeButton>
-            <HomeButton>Sign in</HomeButton>
+            <HomeButton href="#form-container" onClick={() => setTab('register')}>Register</HomeButton>
+            <HomeButton href="#form-container" onClick={() => setTab('signin')}>Sign in</HomeButton>
           </ButtonsContainer>
         </TextButtonsContainerBackground>
       </TextButtonsContainer>
