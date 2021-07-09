@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
-import mobile from 'assets/mobile_hero.jpg'
-import tablet from 'assets/tablet_hero.jpg'
-import desktop from 'assets/desktop_hero.jpg'
+import mobile from "assets/mobile_hero.jpg";
+import tablet from "assets/tablet_hero.jpg";
+import desktop from "assets/desktop_hero.jpg";
 
 const HeroImage = ({ setTab }) => {
   return (
@@ -14,39 +14,48 @@ const HeroImage = ({ setTab }) => {
           <HeroSubtitle>15 September 2021</HeroSubtitle>
           <HeroSubtitle>Artipelag, Värmdö</HeroSubtitle>
           <ButtonsContainer>
-            <HomeButton href="#form-container" onClick={() => setTab('register')}>Register</HomeButton>
-            <HomeButton href="#form-container" onClick={() => setTab('signin')}>Sign in</HomeButton>
+            <HomeButton
+              href="#form-container"
+              onClick={() => setTab("register")}
+            >
+              Register
+            </HomeButton>
+            <HomeButton href="#form-container" onClick={() => setTab("signin")}>
+              Sign in
+            </HomeButton>
           </ButtonsContainer>
         </TextButtonsContainerBackground>
       </TextButtonsContainer>
       <Picture>
-        <source srcSet={tablet} media="(min-width:768px) and (max-width: 949px)" />
+        <source
+          srcSet={tablet}
+          media="(min-width:768px) and (max-width: 949px)"
+        />
         <source srcSet={desktop} media="(min-width: 950px)" />
         <Image src={mobile} />
       </Picture>
     </HeroImageContainer>
-
   );
-}
+};
 
 export default HeroImage;
 
 const HeroImageContainer = styled.div`
   margin: 0;
-  height: 90vh;
+  /* height: 90vh; */
   position: relative;
-  `
+`;
 
 const Picture = styled.picture`
-
-`
+  margin: 0;
+`;
 
 const Image = styled.img`
   margin: 0;
   width: 100%;
   height: 90vh;
   object-fit: cover;
-  `
+`;
 const TextButtonsContainer = styled.div`
   position: absolute;
   /* top: 0;
@@ -57,7 +66,7 @@ const TextButtonsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 const TextButtonsContainerBackground = styled.div`
   background-color: rgba(128, 128, 128, 0.418);
   display: flex;
@@ -66,11 +75,12 @@ const TextButtonsContainerBackground = styled.div`
   padding: 10px;
   margin: 5px;
   justify-content: center;
-`
+`;
+
 const HeroTitle = styled.h1`
   text-align: center;
   font-size: 30px;
-  color: #FCFEFF;
+  color: #fcfeff;
 
   @media (max-width: 370px) {
     font-size: 25px;
@@ -78,13 +88,13 @@ const HeroTitle = styled.h1`
   @media (min-width: 768px) {
     font-size: 50px;
   }
-`
+`;
 
 const HeroSubtitle = styled.h2`
-  color: #E1E2E8;
+  color: #e1e2e8;
   text-align: center;
   font-size: 25px;
-`
+`;
 const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -92,7 +102,7 @@ const ButtonsContainer = styled.div`
   margin: 10px;
   padding: 10px;
   width: 100%;
-`
+`;
 const HomeButton = styled.a`
   border-radius: 10px;
   background-color: #e50038;
@@ -105,4 +115,4 @@ const HomeButton = styled.a`
   text-transform: uppercase;
   text-align: center;
   font-weight: bold;
-`
+`;

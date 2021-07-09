@@ -233,7 +233,7 @@ const FormTitle = styled.h2`
 `
 const FormText = styled.p`
   color: #1d2935;
-`
+`;
 
 const TextFieldStyle = {
   marginTop: "10px",

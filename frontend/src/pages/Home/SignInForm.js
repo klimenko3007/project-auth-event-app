@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import React, { useState } from "react";
+import styled from "styled-components";
+import {
+  createMuiTheme,
+  makeStyles,
+  ThemeProvider,
+} from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const SignInForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const classes = useStyles();
 
   return (
     <ThemeProvider theme={theme}>
       <Container>
-      <FormTitle>Sign in</FormTitle>
-      <FormText>Enter your email and password</FormText>
+        <FormTitle>Sign in</FormTitle>
+        <FormText>Enter your email and password</FormText>
         <Form>
-        <TextField
+          <TextField
             id="email"
             label="Email"
             variant="outlined"
@@ -52,33 +56,33 @@ const SignInForm = () => {
       </Container>
     </ThemeProvider>
   );
-}
+};
 
 export default SignInForm;
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#455F7A',
+      main: "#455F7A",
     },
     secondary: {
-      main: '#5f7a71',
-      contrastText: '#ffcc00',
+      main: "#5f7a71",
+      contrastText: "#ffcc00",
     },
     error: {
-      main: '#AA0E30',
-    }
+      main: "#AA0E30",
+    },
   },
   typography: {
-    fontFamily: 'Raleway, Arial',
-    fontSize: 14
+    fontFamily: "Raleway, Arial",
+    fontSize: 14,
   },
 });
 
 const useStyles = makeStyles({
   root: {
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#6f8eae"
+      borderColor: "#6f8eae",
     },
     "& .MuiTypography-root": {
       color: "#455F7A",
@@ -90,17 +94,17 @@ const useStyles = makeStyles({
       color: "#455F7A",
     },
     "& .MuiInputBase-input": {
-      color: "#253341"
+      color: "#253341",
     },
     "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#33475b"
-    }
-  }
+      borderColor: "#33475b",
+    },
+  },
 });
 
 const TextFieldStyle = {
   marginTop: "10px",
-  width: "90%"
+  width: "90%",
 };
 
 const ButtonStyle = {
@@ -111,16 +115,16 @@ const ButtonStyle = {
 const Container = styled.div`
   min-height: 100vh;
   padding: 10px;
-`
+`;
 const Form = styled.form`
- margin-top: 5px;
- display: flex;
- flex-direction: column;
- align-items: center;
-`
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const FormTitle = styled.h2`
-  color: #435C75;
-`
+  color: #435c75;
+`;
 const FormText = styled.p`
   color: #1d2935;
-`
+`;
