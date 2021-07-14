@@ -24,7 +24,7 @@ export const userSchema = mongoose.Schema({
   participationType: {
     type: String,
   },
-  agreeEmail: {
+  agreeUpdates: {
     type: Boolean,
   } ,
   agreeTerms: {

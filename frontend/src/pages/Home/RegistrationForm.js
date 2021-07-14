@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 
 import { countries } from './countries';
 import { block } from 'strip-comments';
+import { API_URL } from 'reusables/urls';
 
 const RegistrationForm = () => {
   const classes = useStyles();
@@ -27,6 +28,32 @@ const RegistrationForm = () => {
   const [agreeUpdates, setAgreeUpdates] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
 
+
+  const onFormSubmit = (event) => {
+    event.preventDefault()
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        surname,
+        organisation,
+        position,
+        country,
+        email,
+        password,
+        participation,
+        agreeUpdates,
+        agreeTerms,
+      })
+    }
+    fetch(API_URL('users'), options)
+      .then(response => response.json())
+      .then(data => console.log(data))
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <FormContainer >
@@ -34,7 +61,7 @@ const RegistrationForm = () => {
         <FormText>
           Register for the conference to get updates on the programme and speakers. Please fill in all the fields.
         </FormText>
-        <Form autoComplete="off" >
+        <Form autoComplete="off" onSubmit={onFormSubmit}>
           <TextField
             id="email"
             label="Email"

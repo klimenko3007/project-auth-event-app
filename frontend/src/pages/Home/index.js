@@ -6,6 +6,7 @@ import HeroImage from './HeroImage';
 import RegistrationForm from './RegistrationForm';
 import ButtonsPanel from './ButtonsPanel';
 import SignInForm from './SignInForm'
+import { options } from 'yargs';
 
 const Home = () => {
   const [tab, setTab] = useState('register')

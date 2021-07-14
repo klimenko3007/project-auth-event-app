@@ -49,7 +49,7 @@ app.post("/users", async (req, res) => {
     email,
     password,
     agreeTerms,
-    agreeEmail,
+    agreeUpdates,
   } = req.body;
   try {
     const salt = bcrypt.genSaltSync();
@@ -60,7 +60,7 @@ app.post("/users", async (req, res) => {
       position,
       participationType,
       email,
-      agreeEmail,
+      agreeUpdates,
       agreeTerms,
       password: bcrypt.hashSync(password, salt),
     });
