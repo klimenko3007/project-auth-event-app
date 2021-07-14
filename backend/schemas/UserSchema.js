@@ -23,7 +23,13 @@ export const userSchema = mongoose.Schema({
   },
   participationType: {
     type: String,
-  }, 
+  },
+  agreeEmail: {
+    type: Boolean,
+  } ,
+  agreeTerms: {
+    type:Boolean,
+  },
   email: {
     type: String,
     unique: true,

@@ -13,11 +13,8 @@ const Home = () => {
     <PageContainer>
       <HeroImage tab={tab} setTab={setTab} />
       <ButtonsPanel tab={tab} setTab={setTab} />
-      {tab === 'register' ?
-        <RegistrationForm />
-        :
-        <SignInForm />
-      }
+      {tab === 'register' && <RegistrationForm />}
+      {tab === 'signin' && <SignInForm />}
     </PageContainer>
 
   )
