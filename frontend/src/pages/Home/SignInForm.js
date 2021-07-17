@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import {
   createMuiTheme,
   makeStyles,
@@ -8,17 +9,38 @@ import {
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
+import { API_URL } from "reusables/urls";
+import { signUPorSignIN } from "reducers/user";
+
 const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
   const classes = useStyles();
+
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password,
+        email, 
+      }),
+    };
+    dispatch(signUPorSignIN("sessions", options));
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <Container>
         <FormTitle>Sign in</FormTitle>
         <FormText>Enter your email and password</FormText>
-        <Form>
+        <Form onSubmit={onFormSubmit}>
           <TextField
             id="email"
             label="Email"

@@ -77,7 +77,7 @@ app.post("/users", async (req, res) => {
   }
 });
 
-app.get("/users/:id", async (req, res) => {
+app.get("/users/myinformation/:id", authenticateUser, async (req, res) => {
   const { id } = req.params;
   try {
     const user = await User.findById(id);
@@ -88,6 +88,7 @@ app.get("/users/:id", async (req, res) => {
           name: user.name,
           surname: user.surname,
           organisation: user.organisation,
+          email: user.email,
           position: user.position,
           participationType: user.participationType,
           profilePicture: user.profilePicture,
@@ -108,11 +109,42 @@ app.get("/users/:id", async (req, res) => {
   }
 });
 
+app.get("/users/speaker-information/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    if (user) {
+      res.status(200).json({
+        success: true,
+        user: {
+          name: user.name,
+          surname: user.surname,
+          organisation: user.organisation,
+          position: user.position,
+          participationType: user.participationType,
+          profilePicture: user.profilePicture,
+        },
+      });
+    } else {
+      res.status(404).json({ message: "User not found", error });
+    }
+  } catch (error) {
+    res.status(400).json({ message: "Bad request", error });
+  }
+});
+
 app.post("/sessions", async (req, res) => {
   const { password, email } = req.body;
+
   try {
-    const user = await User.findOne({ email });
-    if (user && bcrypt.compareSync(password, user.password)) {
+    const user = await User.findOne({ email }).exec();
+    if (!user) {
+      console.log(user);
+      res.status(404).json({
+        success: false,
+        message: "Could not find user",
+      });
+    } else if (user && bcrypt.compareSync(password, user.password)) {
       res.status(200).json({
         success: true,
         user: {
@@ -120,11 +152,18 @@ app.post("/sessions", async (req, res) => {
           accessToken: user.accessToken,
         },
       });
-    } else {
-      res.status(404).json({ message: "Could not find user", error });
+    } else if (!(user && bcrypt.compareSync(password, user.password))) {
+      res.status(401).json({
+        success: false,
+        message: "Password is incorrect",
+      });
     }
   } catch (error) {
-    res.status(400).json({ message: "Bad request", error });
+    res.status(400).json({
+      success: false,
+      message: "Bad request",
+      error,
+    });
   }
 });
 

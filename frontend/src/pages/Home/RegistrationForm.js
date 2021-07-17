@@ -1,40 +1,46 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import Radio from '@material-ui/core/Radio';
-import Checkbox from '@material-ui/core/Checkbox';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Button from '@material-ui/core/Button';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import {
+  createMuiTheme,
+  makeStyles,
+  ThemeProvider,
+} from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
+import Radio from "@material-ui/core/Radio";
+import Checkbox from "@material-ui/core/Checkbox";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import Button from "@material-ui/core/Button";
 
-import { countries } from './countries';
-import { block } from 'strip-comments';
-import { API_URL } from 'reusables/urls';
+import { countries } from "./countries";
+import { API_URL } from "reusables/urls";
+import { signUPorSignIN } from "reducers/user";
 
 const RegistrationForm = () => {
   const classes = useStyles();
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [organisation, setOrganisation] = useState('');
-  const [position, setPosition] = useState('');
-  const [country, setCountry] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [participation, setParticipation] = useState('');
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [organisation, setOrganisation] = useState("");
+  const [position, setPosition] = useState("");
+  const [country, setCountry] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [participation, setParticipation] = useState("");
   const [agreeUpdates, setAgreeUpdates] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
 
+  const dispatch = useDispatch();
 
   const onFormSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name,
@@ -47,19 +53,18 @@ const RegistrationForm = () => {
         participation,
         agreeUpdates,
         agreeTerms,
-      })
-    }
-    fetch(API_URL('users'), options)
-      .then(response => response.json())
-      .then(data => console.log(data))
-  }
+      }),
+    };
+    dispatch(signUPorSignIN("users", options));
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      <FormContainer >
+      <FormContainer>
         <FormTitle>Register</FormTitle>
         <FormText>
-          Register for the conference to get updates on the programme and speakers. Please fill in all the fields.
+          Register for the conference to get updates on the programme and
+          speakers. Please fill in all the fields.
         </FormText>
         <Form autoComplete="off" onSubmit={onFormSubmit}>
           <TextField
@@ -181,7 +186,8 @@ const RegistrationForm = () => {
                 value="participant"
                 control={<Radio />}
                 label="Participant"
-                color="primary" />
+                color="primary"
+              />
             </RadioGroup>
           </FormControl>
           <FormControlLabel
@@ -223,53 +229,53 @@ const RegistrationForm = () => {
       </FormContainer>
     </ThemeProvider>
   );
-}
+};
 
 export default RegistrationForm;
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#455F7A',
+      main: "#455F7A",
     },
     secondary: {
-      main: '#5f7a71',
-      contrastText: '#ffcc00',
+      main: "#5f7a71",
+      contrastText: "#ffcc00",
     },
     error: {
-      main: '#AA0E30',
-    }
+      main: "#AA0E30",
+    },
   },
   typography: {
-    fontFamily: 'Raleway, Arial',
-    fontSize: 14
+    fontFamily: "Raleway, Arial",
+    fontSize: 14,
   },
 });
 const FormContainer = styled.section`
   min-height: 100vh;
   padding: 10px;
-`
+`;
 const Form = styled.form`
- margin-top: 5px;
- display: flex;
- flex-direction: column;
- align-items: center;
-`
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const FormTitle = styled.h2`
-  color: #435C75;
-`
+  color: #435c75;
+`;
 const FormText = styled.p`
   color: #1d2935;
 `;
 
 const TextFieldStyle = {
   marginTop: "10px",
-  width: "90%"
+  width: "90%",
 };
 
 const SelectorStyle = {
   marginTop: "10px",
-  width: "90%"
+  width: "90%",
 };
 const RadioStyle = {
   marginTop: "10px",
@@ -277,7 +283,7 @@ const RadioStyle = {
   textAlign: "left",
   border: "1px solid #6f8eae",
   padding: "8px",
-  borderRadius: '5px',
+  borderRadius: "5px",
 };
 
 const CheckBoxStyle = {
@@ -292,7 +298,7 @@ const ButtonStyle = {
 const useStyles = makeStyles({
   root: {
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#6f8eae"
+      borderColor: "#6f8eae",
     },
     "& .MuiTypography-root": {
       color: "#455F7A",
@@ -304,10 +310,10 @@ const useStyles = makeStyles({
       color: "#455F7A",
     },
     "& .MuiInputBase-input": {
-      color: "#253341"
+      color: "#253341",
     },
     "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#33475b"
-    }
-  }
+      borderColor: "#33475b",
+    },
+  },
 });

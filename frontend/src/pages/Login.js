@@ -41,7 +41,7 @@ const Login = () => {
     if(accessToken) {
       history.push('/secret')
     }
-  }, [accessToken])
+  }, [accessToken, history])
 
   return (
     <div>
